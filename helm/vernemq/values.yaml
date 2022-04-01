@@ -63,6 +63,7 @@ service:
 ## termination for the websocket traffic. Ingress is only possible for traffic exchanged
 ## over HTTP, so ONLY the websocket service take advantage of ingress.
 ingress:
+  className: ""
   enabled: false
 
   labels: {}
@@ -77,7 +78,9 @@ ingress:
   ## Paths to use for ingress rules.
   ##
   paths:
-    - /
+    - path: /
+      pathType: ImplementationSpecific
+      
 
   ## TLS configuration for ingress
   ## Secret must be manually created in the namespace
