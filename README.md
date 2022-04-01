@@ -19,6 +19,9 @@ User License Agreement](https://vernemq.com/end-user-license-agreement). You can
 read how to accept the VerneMQ EULA
 [here](https://docs.vernemq.com/installation/accepting-the-vernemq-eula).
 
+**NOTE 2 (TL:DR)**:
+To use the binary Docker packages (that is, the official packages from Docker Hub) or the VerneMQ binary Linux packages commercially and legally, you need a paid subscription. Accepting the EULA is your promise to do that. To avoid a subscription, you need to clone this repository and build and host your own Dockerfiles/-images.
+
 ### 2. Using [Helm](https://helm.sh/) to deploy on [Kubernetes](https://kubernetes.io/)
 
 First install and configure Helm according to the [documentation](https://helm.sh/docs/using_helm/#quickstart-guide). Then add VerneMQ Helm charts repository:
@@ -50,6 +53,7 @@ This allows a newly started container to automatically join a VerneMQ cluster. A
     docker run -e "DOCKER_VERNEMQ_ACCEPT_EULA=yes" -e "DOCKER_VERNEMQ_DISCOVERY_NODE=<IP-OF-VERNEMQ1>" --name vernemq2 -d vernemq/vernemq
 
 (Note, you can find the IP of a docker container using `docker inspect <containername/cid> | grep \"IPAddress\"`).
+
 
 ### 4. Automated clustering on Kubernetes without helm
 
@@ -89,6 +93,8 @@ When enabling Kubernetes autoclustering, don't set ```DOCKER_VERNEMQ_DISCOVERY_N
 > ...
 > ```
 If using an vernemq.conf.local file, you can insert a placeholder (`###IPADDRESS###`) in your config to be replaced (at POD creation time) with the actual IP address of the POD vernemq is running on, making VMQ clustering possible.
+
+If istio is enabled you, set `DOCKER_VERNEMQ_KUBERNETES_ISTIO_ENABLED=1` so the init script will check if istio is ready.
 
 ### 5. Using [Docker Swarm](https://docs.docker.com/engine/swarm/)
 

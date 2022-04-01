@@ -85,6 +85,8 @@ spec:
             {{- if .Values.additionalEnv }}
             {{ toYaml .Values.additionalEnv | nindent 12 }}
             {{- end }}
+          envFrom:
+            {{ toYaml .Values.envFrom | nindent 12 }}
           resources:
             {{ toYaml .Values.resources | nindent 12 }}
           livenessProbe:
@@ -124,6 +126,10 @@ spec:
           lifecycle:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
         {{ toYaml . | nindent 8 }}
